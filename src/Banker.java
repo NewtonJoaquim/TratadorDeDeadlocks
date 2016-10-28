@@ -38,7 +38,7 @@ public class Banker {
 		for(int i = 0; i < numberOfProcesses; i++){
 			for(int j = 0; j < numberOfResourceTypes; j++){
 				
-				if((!finish[i]) && (need[i][j] <= work[i])){
+				if((finish[i] == false) && (need[i][j] <= work[i])){
 					
 					for(int x = 0; x < numberOfProcesses; x++){
 						for(int y = 0; y< numberOfResourceTypes; y++){
@@ -50,12 +50,15 @@ public class Banker {
 			}
 		}
 		
+		boolean aux = true;
 		
+		for(int i = 0; i<numberOfProcesses;i++){
+			if(finish[i] == false)
+				aux = false;
+		}
+		if(aux == true)
+			return true;
 		return false;
-	}
-	
-	public static void main(String args[]){
-		
 	}
 
 }
