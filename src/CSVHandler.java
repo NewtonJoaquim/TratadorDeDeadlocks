@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 public class CSVHandler {
-	public ArrayList<Process> readFile(String file) throws IOException{
+	public ArrayList<Process> readProcessesFile(String file) throws IOException{
 		ArrayList<Process> processes= new ArrayList<Process>();
 		
 		ArrayList<Integer> allocatedResourcers = new ArrayList<Integer>();
@@ -27,5 +27,21 @@ public class CSVHandler {
 			processes.add(new Process(allocatedResourcers, maxResourcers));
 		}
 		return processes;
+	}
+	
+	public ArrayList<Integer> readResourcesFile(String file) throws IOException{
+		ArrayList<Integer> resources = new ArrayList<Integer>();
+		
+		@SuppressWarnings("resource")
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String line;
+		while((line = br.readLine()) != null){
+			String[] lineField = line.split(",");
+
+			resources.add(Integer.parseInt(lineField[0]));
+			resources.add(Integer.parseInt(lineField[1]));
+			resources.add(Integer.parseInt(lineField[2]));
+		}
+		return resources;
 	}
 }
