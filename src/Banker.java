@@ -62,7 +62,44 @@ public class Banker {
 	}
 
 	public boolean avoid(ArrayList<Integer> request, Process p){
+		boolean availability = true;
 		
-		return false;
+		for(int i = 0; i< request.size(); i++){
+			if(request.get(i) > need[p.getPID()][i]){
+				availability = false;
+			}
+		}
+		if(!availability){
+			System.out.println("O Processo "+ p.getPID() +" excedeu o limite máximo de requisições");
+			return false;
+		}
+		else{
+			for(int i = 0; i< request.size(); i++){
+				if(request.get(i) > available[i]){
+					availability = false;
+				}
+			}
+			if(!availability){
+				p.setProcessToWait();
+				System.out.println("O Processo" +p.getPID() + " Espera por recursos");
+				return false;
+			}
+			else{
+				for(int i = 0; i<numberOfResourceTypes; i++){
+					available[i] = available[i] - request.get(i);
+					allocation[p.getPID()][i] = allocation[p.getPID()][i] + request.get(i);
+					need[p.getPID()][i] = need[p.getPID()][i] - request.get(i);
+				}
+				if(safety()){
+					p.setProcessToReady();
+					return true;
+				}
+				else{
+					p.setProcessToWait();
+					return false;
+				}
+			}
+			
+		}
 	}
 }

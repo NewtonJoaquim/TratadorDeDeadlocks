@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class CSVHandler {
 	public ArrayList<Process> readProcessesFile(String file) throws IOException{
+		
+		int pID = 0;
+		
 		ArrayList<Process> processes= new ArrayList<Process>();
 		
 		ArrayList<Integer> allocatedResourcers = new ArrayList<Integer>();
@@ -24,7 +27,8 @@ public class CSVHandler {
 			maxResourcers.add(Integer.parseInt(lineField[4]));
 			maxResourcers.add(Integer.parseInt(lineField[5]));
 			
-			processes.add(new Process(allocatedResourcers, maxResourcers));
+			processes.add(new Process(pID ,allocatedResourcers, maxResourcers));
+			pID++;
 		}
 		return processes;
 	}
@@ -44,4 +48,5 @@ public class CSVHandler {
 		}
 		return resources;
 	}
+		
 }

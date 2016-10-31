@@ -2,17 +2,20 @@ import java.util.ArrayList;
 
 public class Process {
 
+	private int pID;
+	
 	private ArrayList<Integer> allocatedResources = new ArrayList<Integer>();
 	private ArrayList<Integer> maxResources = new ArrayList<Integer>();
 
 	private enum ProcessState{READY, WAIT};
 	private ProcessState processState;
 
-	public Process(ArrayList<Integer> allocatedResources, ArrayList<Integer> maxResources) {
+	public Process(int pID, ArrayList<Integer> allocatedResources, ArrayList<Integer> maxResources) {
 		super();
+		this.pID = pID;
 		this.allocatedResources = allocatedResources;
 		this.maxResources = maxResources;
-		this.processState = processState.READY;
+		this.processState = ProcessState.READY;
 	}
 
 	public int getAllocatedResource(int i){
@@ -27,7 +30,15 @@ public class Process {
 		return processState;
 	}
 
-	public void setProcessState(ProcessState processState) {
-		this.processState = processState;
+	public void setProcessToWait() {
+		this.processState = ProcessState.WAIT;
+	}
+	
+	public void setProcessToReady() {
+		this.processState = ProcessState.READY;
+	}
+	
+	public int getPID(){
+		return this.pID;
 	}
 }

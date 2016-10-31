@@ -11,9 +11,16 @@ public class ExecutionManager {
 	
 	public static void checkSafety(Banker b){
 		if(b.safety() == true)
-			System.out.println("Não há risco de ocorrência de Deadlock");
+			System.out.println("NÃ£o hÃ¡ risco de ocorrÃªncia de Deadlock");
 		else
-			System.out.println("Há risco de ocorrência de Deadlock");
+			System.out.println("HÃ¡ risco de ocorrÃªncia de Deadlock");
+	}
+	
+	public static void resourceRequest(Banker b, ArrayList<Integer> request, Process p){
+		if(b.avoid(request, p) == true)
+			System.out.println("Recursos alocados com sucesso para o processo "+p.getPID());
+		else
+			System.out.println("SolicitaÃ§Ã£o nÃ£o permitida. O Processo " + p.getPID()+ " espera");
 	}
 	
 	public static void main(String args[]) throws IOException{
@@ -21,6 +28,9 @@ public class ExecutionManager {
 		ExecutionManager em = new ExecutionManager(handler.readResourcesFile("recursos.csv"));
 		Banker b = new Banker(handler.readProcessesFile("processos.csv"), em.availableResources);
 		
-		checkSafety(b);
+		Process testProcess = handler.readProcessesFile("processos.csv").get(2);
+		
+		//checkSafety(b);
+		resourceRequest(b, handler.readResourcesFile("request.csv"), testProcess);
 	}
 }
