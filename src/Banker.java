@@ -30,7 +30,7 @@ public class Banker {
 	
 	public boolean safety(){
 		int[] work = available;
-		boolean finish[] = new boolean[numberOfProcesses];
+		boolean[] finish = new boolean[numberOfProcesses];
 		
 		for(int i = 0; i < numberOfProcesses; i++){
 			finish[i] = false;
@@ -102,4 +102,34 @@ public class Banker {
 			
 		}
 	}
+	
+	public boolean detection(int[][] request){
+		boolean FoundIndex = false;
+		int[] work = available;
+		boolean[] finish = new boolean[numberOfProcesses];
+		
+		for(int i = 0; i<numberOfProcesses;i++){
+			for(int j = 0; j<numberOfResourceTypes; j++){
+				if(allocation[i][j] != 0)
+					finish[i] = false;
+				else
+					finish[i] = true;
+			}
+		}
+		
+		for(int i = 0; i < numberOfProcesses; i++){
+			for(int j = 0; j<numberOfResourceTypes; j++){
+				if((finish[i] == false)&&(request[i][j]<=work[j])){
+					FoundIndex = true;
+					work[j] = work[j] + allocation[i][j];
+					finish[i] = true;
+				}
+			}
+		}
+		
+		
+		
+		return false;
+	}
+	
 }

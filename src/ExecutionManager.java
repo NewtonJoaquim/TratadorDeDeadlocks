@@ -30,7 +30,7 @@ public class ExecutionManager {
 		
 		Process testProcess = handler.readProcessesFile("processos.csv").get(2);
 		
-		//checkSafety(b);
-		resourceRequest(b, handler.readResourcesFile("request.csv"), testProcess);
+		checkSafety(b);
+		//resourceRequest(b, handler.readResourcesFile("request.csv"), testProcess);
 	}
 }
