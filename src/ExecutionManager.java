@@ -23,6 +23,13 @@ public class ExecutionManager {
 			System.out.println("Solicitação não permitida. O Processo " + p.getPID()+ " espera");
 	}
 	
+	public static void detectDeadlock(Banker b, ArrayList<Integer> request){
+		if(b.detection(request).size() == 0)
+			System.out.println("Não ocorreu DeadLock");
+		else
+			System.out.println("Ocorreu DeadLock");
+	}
+	
 	public static void main(String args[]) throws IOException{
 		CSVHandler handler = new CSVHandler();
 		ExecutionManager em = new ExecutionManager(handler.readResourcesFile("recursos.csv"));
@@ -30,7 +37,8 @@ public class ExecutionManager {
 		
 		Process testProcess = handler.readProcessesFile("processos.csv").get(2);
 		
-		checkSafety(b);
+		//checkSafety(b);
 		//resourceRequest(b, handler.readResourcesFile("request.csv"), testProcess);
+		detectDeadlock(b, handler.readResourcesFile("request.csv"));
 	}
 }

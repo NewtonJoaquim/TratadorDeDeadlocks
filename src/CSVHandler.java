@@ -11,24 +11,27 @@ public class CSVHandler {
 		
 		ArrayList<Process> processes= new ArrayList<Process>();
 		
-		ArrayList<Integer> allocatedResourcers = new ArrayList<Integer>();
-		ArrayList<Integer> maxResourcers = new ArrayList<Integer>();
+		ArrayList<Integer> allocatedResources = new ArrayList<Integer>();
+		ArrayList<Integer> maxResources = new ArrayList<Integer>();
 		
 		@SuppressWarnings("resource")
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line;
+		//line = br.readLine();
 		while((line = br.readLine()) != null){
 			String[] lineField = line.split(",");
 
-			allocatedResourcers.add(Integer.parseInt(lineField[0]));
-			allocatedResourcers.add(Integer.parseInt(lineField[1]));
-			allocatedResourcers.add(Integer.parseInt(lineField[2]));
-			maxResourcers.add(Integer.parseInt(lineField[3]));
-			maxResourcers.add(Integer.parseInt(lineField[4]));
-			maxResourcers.add(Integer.parseInt(lineField[5]));
+			allocatedResources.add(Integer.parseInt(lineField[0]));
+			System.out.println(allocatedResources.get(0));
+			allocatedResources.add(Integer.parseInt(lineField[1]));
+			allocatedResources.add(Integer.parseInt(lineField[2]));
+			maxResources.add(Integer.parseInt(lineField[3]));
+			maxResources.add(Integer.parseInt(lineField[4]));
+			maxResources.add(Integer.parseInt(lineField[5]));
 			
-			processes.add(new Process(pID ,allocatedResourcers, maxResourcers));
+			processes.add(new Process(pID ,allocatedResources, maxResources));
 			pID++;
+			//line=br.readLine();
 		}
 		return processes;
 	}

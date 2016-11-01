@@ -103,33 +103,42 @@ public class Banker {
 		}
 	}
 	
-	public boolean detection(int[][] request){
-		boolean FoundIndex = false;
+	public ArrayList<Integer> detection(ArrayList<Integer> request){
 		int[] work = available;
 		boolean[] finish = new boolean[numberOfProcesses];
+		ArrayList<Integer> deadLockedProcesses = new ArrayList<Integer>();
 		
 		for(int i = 0; i<numberOfProcesses;i++){
 			for(int j = 0; j<numberOfResourceTypes; j++){
+				//System.out.println(allocation[i][j]);
 				if(allocation[i][j] != 0)
 					finish[i] = false;
 				else
 					finish[i] = true;
 			}
 		}
-		
 		for(int i = 0; i < numberOfProcesses; i++){
 			for(int j = 0; j<numberOfResourceTypes; j++){
-				if((finish[i] == false)&&(request[i][j]<=work[j])){
-					FoundIndex = true;
-					work[j] = work[j] + allocation[i][j];
+				
+				if((finish[i] == false)&&(request.get(j)<=work[j])){
+					
+					for(int x = 0; x < numberOfProcesses; x++){
+						for(int y = 0; y< numberOfResourceTypes; y++){
+							work[y] += allocation[x][y];
+						}
+					}
 					finish[i] = true;
 				}
 			}
 		}
-		
-		
-		
-		return false;
+		for(int i=0 ;i<numberOfProcesses ;i++){
+			if(finish[i] == false){
+				System.out.println("O processo "+ i +" está em Deadlock.");
+				deadLockedProcesses.add(i);
+			}
+		}
+		return deadLockedProcesses;
+
 	}
 	
 }
