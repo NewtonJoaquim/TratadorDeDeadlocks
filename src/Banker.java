@@ -61,7 +61,8 @@ public class Banker {
 		return false;
 	}
 
-	public boolean avoid(){
+	public boolean avoid(ArrayList<Integer> request, Process p){
+		
 		return false;
 	}
 }
