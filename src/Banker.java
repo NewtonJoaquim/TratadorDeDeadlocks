@@ -110,7 +110,6 @@ public class Banker {
 		
 		for(int i = 0; i<numberOfProcesses;i++){
 			for(int j = 0; j<numberOfResourceTypes; j++){
-				//System.out.println(allocation[i][j]);
 				if(allocation[i][j] != 0)
 					finish[i] = false;
 				else

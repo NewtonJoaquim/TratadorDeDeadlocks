@@ -33,12 +33,12 @@ public class ExecutionManager {
 	public static void main(String args[]) throws IOException{
 		CSVHandler handler = new CSVHandler();
 		ExecutionManager em = new ExecutionManager(handler.readResourcesFile("recursos.csv"));
-		Banker b = new Banker(handler.readProcessesFile("processos.csv"), em.availableResources);
+		Banker b = new Banker(handler.readProcessesFile("/home/362981/Lab07/processos.csv"), em.availableResources);
 		
 		Process testProcess = handler.readProcessesFile("processos.csv").get(2);
 		
 		//checkSafety(b);
-		//resourceRequest(b, handler.readResourcesFile("request.csv"), testProcess);
-		detectDeadlock(b, handler.readResourcesFile("request.csv"));
+		resourceRequest(b, handler.readResourcesFile("request.csv"), testProcess);
+		//detectDeadlock(b, handler.readResourcesFile("request.csv"));
 	}
 }
