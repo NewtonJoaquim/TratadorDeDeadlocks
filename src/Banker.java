@@ -39,12 +39,12 @@ public class Banker {
 			for(int j = 0; j < numberOfResourceTypes; j++){
 				
 				if((finish[i] == false) && (need[i][j] <= work[i])){
-					
-					for(int x = 0; x < numberOfProcesses; x++){
+					work[j] +=allocation[i][j];
+				/*	for(int x = 0; x < numberOfProcesses; x++){
 						for(int y = 0; y< numberOfResourceTypes; y++){
 							work[y] += allocation[x][y];
 						}
-					}
+					}*/
 					finish[i] = true;
 				}
 			}
@@ -70,7 +70,7 @@ public class Banker {
 			}
 		}
 		if(!availability){
-			System.out.println("O Processo "+ p.getPID() +" excedeu o limite máximo de requisições");
+			System.out.println("O Processo "+ p.getPID() +" excedeu o limite maximo de requisicoes");
 			return false;
 		}
 		else{
@@ -120,19 +120,19 @@ public class Banker {
 			for(int j = 0; j<numberOfResourceTypes; j++){
 				
 				if((finish[i] == false)&&(request.get(j)<=work[j])){
-					
-					for(int x = 0; x < numberOfProcesses; x++){
+					work[j] +=allocation[i][j];
+				  /*for(int x = 0; x < numberOfProcesses; x++){
 						for(int y = 0; y< numberOfResourceTypes; y++){
 							work[y] += allocation[x][y];
 						}
-					}
+					}*/
 					finish[i] = true;
 				}
 			}
 		}
 		for(int i=0 ;i<numberOfProcesses ;i++){
 			if(finish[i] == false){
-				System.out.println("O processo "+ i +" está em Deadlock.");
+				System.out.println("O processo "+ i +" esta em Deadlock.");
 				deadLockedProcesses.add(i);
 			}
 		}
