@@ -3,10 +3,10 @@ import java.util.ArrayList;
 public class Banker {
 	int numberOfProcesses, numberOfResourceTypes;
 	
-	int[] available; /*= new int[numberOfResourceTypes];*/
-	int[][] max; /* = new int [numberOfProcesses][numberOfResourceTypes];*/
-	int[][] allocation;/* = new int[numberOfProcesses][numberOfResourceTypes];*/
-	int[][] need;/* = new int[numberOfProcesses][numberOfResourceTypes];*/
+	int[] available;
+	int[][] max; 
+	int[][] allocation;
+	int[][] need;
 	
 	public Banker(ArrayList<Process> processList, ArrayList<Integer> resources) {
 		super();
@@ -121,11 +121,6 @@ public class Banker {
 				
 				if((finish[i] == false)&&(request.get(j)<=work[j])){
 					work[j] +=allocation[i][j];
-				  /*for(int x = 0; x < numberOfProcesses; x++){
-						for(int y = 0; y< numberOfResourceTypes; y++){
-							work[y] += allocation[x][y];
-						}
-					}*/
 					finish[i] = true;
 				}
 			}
@@ -139,5 +134,6 @@ public class Banker {
 		return deadLockedProcesses;
 
 	}
+	
 	
 }

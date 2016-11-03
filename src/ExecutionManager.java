@@ -26,9 +26,8 @@ public class ExecutionManager {
 	public static void detectDeadlock(Banker b, ArrayList<Integer> request){
 		if(b.detection(request).size() == 0)
 			System.out.println("Nao ocorreu DeadLock");
-		else
-			System.out.println("Ocorreu DeadLock");
 	}
+	
 	
 	public static void main(String args[]) throws IOException{
 		CSVHandler handler = new CSVHandler();
@@ -37,8 +36,8 @@ public class ExecutionManager {
 		
 		Process testProcess = handler.readProcessesFile("processos.csv").get(2);
 		
-		checkSafety(b);
+		//checkSafety(b);
 		//resourceRequest(b, handler.readResourcesFile("request.csv"), testProcess);
-		//detectDeadlock(b, handler.readResourcesFile("request.csv"));
+		detectDeadlock(b, handler.readResourcesFile("request.csv"));
 	}
 }
